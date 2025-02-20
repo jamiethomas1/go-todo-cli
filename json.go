@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 )
@@ -12,6 +13,20 @@ type TodoList struct {
 
 func (tl *TodoList) push(ti TodoItem) {
 	tl.Items = append(tl.Items, ti)
+}
+
+func (tl *TodoList) show() {
+	fmt.Println("To-do List")
+
+	for _, item := range tl.Items {
+		var checkbox rune
+		if item.Complete {
+			checkbox = '☑'
+		} else {
+			checkbox = '☐'
+		}
+		fmt.Printf("%c %s\n", checkbox, item.Task)
+	}
 }
 
 func getTodoList() TodoList {
