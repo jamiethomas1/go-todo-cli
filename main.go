@@ -31,6 +31,18 @@ func main() {
 		log.Printf("Adding value \"%s\"\n", config.Add)
 
 		tl.push(ti)
+	} else if config.Remove != -1 {
+		item, err := tl.get(config.Remove - 1)
+		if err != nil {
+			log.Fatal("error getting todo item at given index")
+		}
+
+		log.Printf("Removing item \"%s\"\n", item)
+
+		err = tl.drop(config.Remove - 1)
+		if err != nil {
+			log.Fatal("error removing todo item at given index")
+		}
 	}
 
 	err = writeTodoList(&tl)
